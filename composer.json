@@ -1,8 +1,8 @@
 {
-    "name": "adrian/ws",
+    "name": "adrii/whatsapp-api",
     "autoload": {
         "psr-4": {
-            "Adrian\\Ws\\": "src/"
+            "Adrian\\Whatsapp\\": "src/"
         }
     },
     "authors": [
