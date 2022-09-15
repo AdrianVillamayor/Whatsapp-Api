@@ -1,0 +1,19 @@
+{
+    "name": "adrian/ws",
+    "autoload": {
+        "psr-4": {
+            "Adrian\\Ws\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Adrii",
+            "email": "adrian.villamayor@gmail.com"
+        }
+    ],
+    "require": {
+        "adrii/curl-helper": "^1.7"
+    },
+    
+    "minimum-stability": "dev"
+}
