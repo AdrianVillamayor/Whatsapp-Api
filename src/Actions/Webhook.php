@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Adrii\Whatsapp\Actions\Webhook;
+namespace Adrii\Whatsapp\Actions;
 
 use Adrii\Whatsapp\OAuth\Config;
 
