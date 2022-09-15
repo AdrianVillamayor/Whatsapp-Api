@@ -1,5 +1,5 @@
 {
-    "name": "adrii/wahatsapp-api",
+    "name": "adrii/whatsapp-api",
     "autoload": {
         "psr-4": {
             "Adrian\\Whatsapp\\": "src/"
