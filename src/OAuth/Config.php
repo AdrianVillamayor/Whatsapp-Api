@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Adrii\LogMeal\OAuth;
+namespace Adrii\Whatsapp\OAuth;
 
 class Config
 {
