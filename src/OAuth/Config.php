@@ -19,7 +19,7 @@ class Config
         $this->api_version      = $api_version;
     }
 
-    public function getPhoneNumberId(): int
+    public function getPhoneNumberId(): string
     {
         return $this->phone_number_id;
     }
