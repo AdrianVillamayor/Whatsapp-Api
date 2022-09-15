@@ -19,11 +19,6 @@ class Config
         $this->api_version      = $api_version;
     }
 
-    public function getUserToken(): string
-    {
-        return $this->user_token;
-    }
-
     public function getPhoneNumberId(): int
     {
         return $this->phone_number_id;

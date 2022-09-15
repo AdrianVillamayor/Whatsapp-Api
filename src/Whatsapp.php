@@ -7,15 +7,16 @@ use Exception;
 use Adrii\Whatsapp\OAuth\Config;
 
 use Adrii\Whatsapp\Actions\Messages;
+use Adrii\Whatsapp\Actions\Webhook;
 
 class Whatsapp
 {
     private $config;
 
     /**
-     * @param string $phoneNumberId
-     * @param string $accessToken
-     * @param string $version
+     * @param string $phone_number_id
+     * @param string $access_token
+     * @param string $api_version
      * @throws Exception
      */
     public function __construct(string $phone_number_id, string $access_token, string $api_version = "v14.0")
@@ -24,15 +25,20 @@ class Whatsapp
             throw new Exception('phone_number_id and access_token are required');
         }
 
-        $this->config   = new Config($phone_number_id, $access_token, $api_version);
+        $this->config       = new Config($phone_number_id, $access_token, $api_version);
 
-        $this->messages  = new Messages($this->config);
-
+        $this->messages     = new Messages($this->config);
+        $this->webhook      = new Webhook($this->config);
     }
 
     public function send_message()
     {
         return $this->messages;
+    }
+    
+    public function webhook()
+    {
+        return $this->webhook;
     }
 
 
