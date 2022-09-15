@@ -221,7 +221,7 @@ class Messages
      * @param array $button
      * @return array
      */
-    private function createButton($button)
+    public function createButton($button)
     {
         return [
             "type"      => "list",
