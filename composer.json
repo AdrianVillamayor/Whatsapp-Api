@@ -1,16 +1,19 @@
 {
     "name": "adrii/whatsapp-api",
-    "autoload": {
-        "psr-4": {
-            "Adrian\\Whatsapp\\": "src/"
-        }
-    },
+    "description": "",
+    "type": "library",
+    "license": "MIT",
     "authors": [
         {
-            "name": "Adrii",
+            "name": "Adrian",
             "email": "adrian.villamayor@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Adrii\\Whatsapp\\": "src/"
+        }
+    },
     "require": {
         "adrii/curl-helper": "^1.7"
     },
