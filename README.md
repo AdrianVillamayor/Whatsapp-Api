@@ -62,12 +62,14 @@ $ws->send_message()->image("https://avatars.githubusercontent.com/u/29653964?v=4
 $ws->send_message()->image("https://avatars.githubusercontent.com/u/29653964?v=4", $recipientId, "individual", null, false);
 ```
 
+Send an audio, as a link or as multimedia
 ```php
 $ws->send_message()->audio("https://file-examples.com/storage/fe783a5cbb6323602a28c66/2017/11/file_example_MP3_1MG.mp3", $recipient_id);
 
 $ws->send_message()->audio("https://file-examples.com/storage/fe783a5cbb6323602a28c66/2017/11/file_example_MP3_1MG.mp3", $recipientId, "individual", null, false);
 ```
 
+Send an video, as a link or as multimedia
 ```php
 $ws->send_message()->video("https://file-examples.com/storage/fe783a5cbb6323602a28c66/2017/04/file_example_MP4_480_1_5MG.mp4", $recipient_id);
 
@@ -75,6 +77,7 @@ $ws->send_message()->video("https://file-examples.com/storage/fe783a5cbb6323602a
 
 ```
 
+Send an document, as a link or as multimedia
 ```php
 $ws->send_message()->document("https://file-examples.com/storage/fe783a5cbb6323602a28c66/2017/10/file-sample_150kB.pdf", $recipient_id);
 
@@ -82,6 +85,7 @@ $ws->send_message()->document("https://file-examples.com/storage/fe783a5cbb63236
 
 ```
 
+Send an interactive message with list of buttons
 ```php
 $button = [
     "header" => "Test Header",
