@@ -1,8 +1,8 @@
 # Whatsapp-Api
 
-[![Latest Stable Version](http://img.shields.io/packagist/v/adrii/curl-helper.svg)](https://packagist.org/packages/adrii/curl-helper)
-[![Total Downloads](http://img.shields.io/packagist/dt/adrii/curl-helper.svg)](https://packagist.org/packages/adrii/curl-helper)
-[![License](http://img.shields.io/packagist/l/adrii/curl-helper.svg)](https://packagist.org/packages/adrii/curl-helper)
+[![Latest Stable Version](http://img.shields.io/packagist/v/adrii/whatsapp-api.svg)](https://packagist.org/packages/adrii/whatsapp-api)
+[![Total Downloads](http://img.shields.io/packagist/dt/adrii/whatsapp-api.svg)](https://packagist.org/packages/adrii/whatsapp-api)
+[![License](http://img.shields.io/packagist/l/adrii/whatsapp-api.svg)](https://packagist.org/packages/adrii/whatsapp-api)
 
 WhatsApp-Api is a lightweight library to easily interact with cloud APIs of the WhatsApp Business Platform.
 ## Installation
