@@ -107,7 +107,7 @@ class Messages
      * @param $link
      * @return mixed
      */
-    public function image($image, $recipientId, string $recipientType = "individual", $caption = null, $link = true)
+    public function image(string $image, string $recipientId, string $recipientType = "individual", $caption = null, bool $link = true)
     {
         $prefab = ($link) ? "link" : "id";
 
@@ -137,7 +137,7 @@ class Messages
      * @param $link
      * @return mixed
      */
-    public function audio($audio, $recipientId, $link = true)
+    public function audio(string $audio, string $recipientId, bool $link = true)
     {
         $data = [
             "messaging_product" => "whatsapp",
@@ -162,7 +162,7 @@ class Messages
      * @param $link
      * @return mixed
      */
-    public function video($video, $recipientId, $caption = null, $link = true)
+    public function video(string $video, string $recipientId, $caption = null, bool $link = true)
     {
         $prefab = ($link) ? "link" : "id";
 
@@ -192,7 +192,7 @@ class Messages
      * @param $link
      * @return mixed
      */
-    public function document($document, $recipientId, $caption = null, $link = true)
+    public function document(string $document, string $recipientId, $caption = null, bool $link = true)
     {
         $prefab = ($link) ? "link" : "id";
 
@@ -221,7 +221,7 @@ class Messages
      * @param array $button
      * @return array
      */
-    public function createButton($button)
+    public function createButton(array $button)
     {
         return [
             "type"      => "list",
@@ -237,7 +237,7 @@ class Messages
      * @param $recipientId
      * @return mixed
      */
-    public function interactive($button, $recipientId)
+    public function interactive(array $button, string $recipientId)
     {
         $data = [
             "messaging_product" => "whatsapp",

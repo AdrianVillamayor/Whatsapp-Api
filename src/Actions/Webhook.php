@@ -16,7 +16,7 @@ class Webhook
         $this->config        = $config;
     }
 
-    public function auth($get_params)
+    public function connect($get_params)
     {
         if (!empty($get_params)) {
             $mode       = isset($get_params["hub.mode"])          ? $get_params["hub.mode"] : $get_params["hub_mode"];
