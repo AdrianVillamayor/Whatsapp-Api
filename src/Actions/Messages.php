@@ -32,7 +32,7 @@ class Messages
             "recipient_type"    => $recipientType,
             "to"                => $recipientId,
             "type"              => "text",
-            "text"              => ["preview_url" => $previewUrl, "body" => $message],
+            "text"              => ["preview_url" => $previewUrl, "body" => $message]
         ];
 
         $url     = $this->config->getApiUri($this->uri);
@@ -223,13 +223,21 @@ class Messages
      */
     public function createInteraction(array $button, string $type)
     {
-        return [
+        $elem =  [
             "type"      => $type,
-            "header"    => ["type" => "text", "text" => $button["header"]],
             "body"      => ["text" => $button["body"]],
-            "footer"    => ["text" => $button["footer"]],
             "action"    => $button["action"]
         ];
+
+        if(isset($button['header'])){
+            $elem["header"] = ["type" => "text", "text" => $button["header"]];
+        }
+        
+        if(isset($button['footer'])){
+            $elem["footer"] = ["text" => $button["footer"]];
+        }
+
+        return $elem;
     }
 
     /**
