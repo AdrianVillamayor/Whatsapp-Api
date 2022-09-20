@@ -85,9 +85,40 @@ $ws->send_message()->document("https://file-examples.com/storage/fe783a5cbb63236
 
 ```
 
-Send an interactive message with list of buttons
+Send an interactive message with reply buttons
 ```php
 $button = [
+        "header" => "Header",
+        "body"   => "Body",
+        "footer" => "Footer",
+        "action" => [
+            "buttons" => [
+                [
+                    "type" => "reply",
+                    "reply" => [
+                        "id" => "UNIQUE_BUTTON_ID_1",
+                        "title" => "BUTTON_TITLE_1"
+                    ]
+                ],
+                [
+                    "type" => "reply",
+                    "reply" => [
+                        "id" => "UNIQUE_BUTTON_ID_2",
+                        "title" => "BUTTON_TITLE_2"
+                    ]
+                ]
+            ]
+        ]
+    ];
+
+$ws->send_message()->interactive($button, $recipient_id, "button");
+
+```
+
+
+Send an interactive message with list of buttons
+```php
+$list = [
     "header" => "Test Header",
     "body"   => "Test Body",
     "footer" => "Test Footer",
@@ -129,7 +160,7 @@ $button = [
     ]
 ];
 
-$ws->send_message()->interactive($button, $recipient_id);
+$ws->send_message()->interactive($list, $recipient_id, "list");
 
 ```
 
