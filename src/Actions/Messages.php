@@ -221,10 +221,10 @@ class Messages
      * @param array $button
      * @return array
      */
-    public function createButton(array $button)
+    public function createInteraction(array $button, string $type)
     {
         return [
-            "type"      => "list",
+            "type"      => $type,
             "header"    => ["type" => "text", "text" => $button["header"]],
             "body"      => ["text" => $button["body"]],
             "footer"    => ["text" => $button["footer"]],
@@ -237,13 +237,13 @@ class Messages
      * @param $recipientId
      * @return mixed
      */
-    public function interactive(array $button, string $recipientId)
+    public function interactive(array $button, string $recipientId, string $type = "list")
     {
         $data = [
             "messaging_product" => "whatsapp",
             "to"                => $recipientId,
             "type"              => "interactive",
-            "interactive"       => $this->createButton($button),
+            "interactive"       => $this->createInteraction($button, $type),
         ];
 
         $url     = $this->config->getApiUri($this->uri);
