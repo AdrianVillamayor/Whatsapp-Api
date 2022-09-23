@@ -25,7 +25,7 @@ class Webhook
 
             if (!empty($mode) && !empty($token)) {
                 // Check the mode and token sent are correct
-                if ($mode === "subscribe" && $token === $this->token) {
+                if ($mode === "subscribe" && $token === $this->config->getAccessToken()) {
                     // Respond with 200 OK and challenge token from the request
                     $http_code = 200;
                     $data = intval($challenge);
