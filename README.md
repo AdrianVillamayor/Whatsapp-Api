@@ -33,6 +33,7 @@ $ws = new Whatsapp($phone_number_id, $access_token, $graph_version);
 To be alerted when you receive a message or when the status of a message changes, you need to set up a webhook connection point for your app.
 
 This method handles the entire connection request on its own.
+The access_token is used to validate the connection.
 
 ```php
 $ws->webhook()->connect($_GET);
