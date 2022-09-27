@@ -55,35 +55,33 @@ Sends a location, through a longitude, latitude and an address.
 $ws->send_message()->location("41.403191", "2.174840", "La Sagrada Família", "C/ De Mallorca, 401, 08013 Barcelona", $recipient_id);
 ```
 
-Send an image, as a link or as multimedia
+Send a media, as a link or id
 ```php
-$ws->send_message()->image("https://avatars.githubusercontent.com/u/29653964?v=4", $recipient_id);
+$ws->send_message()->media("image", "https://avatars.githubusercontent.com/u/29653964?v=4", $recipient_id);
 
-$ws->send_message()->image("https://avatars.githubusercontent.com/u/29653964?v=4", $recipientId, "individual", null, false);
+$ws->send_message()->media("video", "https://file-examples.com/storage/fe4658769b6331540b05587/2017/04/file_example_MP4_480_1_5MG.mp4", $recipient_id);
+
+$ws->send_message()->media("document", "https://file-examples.com/storage/fe4658769b6331540b05587/2017/10/file-sample_150kB.pdf", $recipient_id);
+
+$ws->send_message()->media("audio", "https://file-examples.com/storage/fe4658769b6331540b05587/2017/11/file_example_MP3_700KB.mp3", $recipient_id);
+
+$ws->send_message()->media("sticker", "https://img-03.stickers.cloud/packs/210a9e68-b249-405f-8ea1-9af015ef074a/webp/c5b7bded-e0f0-4f79-86aa-ffd825aba680.webp", $recipient_id);
 ```
 
-Send an audio, as a link or as multimedia
+Describes the specified image or video media with caption.
 ```php
-$ws->send_message()->audio("https://file-examples.com/storage/fe783a5cbb6323602a28c66/2017/11/file_example_MP3_1MG.mp3", $recipient_id);
+$ws->send_message()->media("image", "https://avatars.githubusercontent.com/u/29653964?v=4", $recipient_id, "individual", true, "your-image-caption-to-be-sent");
 
-$ws->send_message()->audio("https://file-examples.com/storage/fe783a5cbb6323602a28c66/2017/11/file_example_MP3_1MG.mp3", $recipientId, "individual", null, false);
+$ws->send_message()->media("video", "https://file-examples.com/storage/fe4658769b6331540b05587/2017/04/file_example_MP4_480_1_5MG.mp4", $recipient_id, "individual", true, "your-video-caption-to-be-sent");
+$recipient_id);
 ```
 
-Send an video, as a link or as multimedia
+Describes the filename for the specific document.
 ```php
-$ws->send_message()->video("https://file-examples.com/storage/fe783a5cbb6323602a28c66/2017/04/file_example_MP4_480_1_5MG.mp4", $recipient_id);
-
-$ws->send_message()->video("https://file-examples.com/storage/fe783a5cbb6323602a28c66/2017/04/file_example_MP4_480_1_5MG.mp4", $recipientId, "individual", null, false);
-
+$ws->send_message()->media("document", "https://file-examples.com/storage/fe4658769b6331540b05587/2017/10/file-sample_150kB.pdf", $recipient_id, "individual", true, null, "example_filename.pdf");
+$recipient_id);
 ```
 
-Send an document, as a link or as multimedia
-```php
-$ws->send_message()->document("https://file-examples.com/storage/fe783a5cbb6323602a28c66/2017/10/file-sample_150kB.pdf", $recipient_id);
-
-$ws->send_message()->document("https://file-examples.com/storage/fe783a5cbb6323602a28c66/2017/10/file-sample_150kB.pdf", $recipientId, "individual", null, false);
-
-```
 
 Send an interactive message with reply buttons
 ```php

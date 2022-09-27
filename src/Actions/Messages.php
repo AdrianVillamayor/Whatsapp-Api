@@ -6,6 +6,7 @@ namespace Adrii\Whatsapp\Actions;
 
 use Adrii\Whatsapp\OAuth\Config;
 use Adrii\Whatsapp\Http\Request;
+use Exception;
 
 class Messages
 {
@@ -19,6 +20,7 @@ class Messages
     }
 
     /**
+     * https://developers.facebook.com/docs/whatsapp/on-premises/reference/messages?locale=en_US#text-object
      * @param string $message
      * @param string $recipientId
      * @param string $recipientType
@@ -45,18 +47,23 @@ class Messages
     }
 
     /**
+     * https://developers.facebook.com/docs/whatsapp/on-premises/reference/messages?locale=en_US#template-object
      * @param string $template
      * @param string $recipientId
      * @param string $lang
+     * @param ?array $components
      * @return mixed
      */
-    public function template(string $template, string $recipientId, string $lang = "en_US")
+    public function template(string $template, string $recipientId, string $lang = "en_US", ?array $components = null)
     {
         $data = [
             "messaging_product" => "whatsapp",
             "to"                => $recipientId,
             "type"              => "template",
-            "template"          => ["name" => $template, "language" => ["code" => $lang]],
+            "template"          => [
+                "name"      => $template,
+                "language"  => ["code" => $lang]
+            ],
         ];
 
         $url     = $this->config->getApiUri($this->uri);
@@ -100,119 +107,61 @@ class Messages
     }
 
     /**
-     * @param $image
-     * @param $recipientId
+     * https://developers.facebook.com/docs/whatsapp/on-premises/reference/media
+     * @param string $type [audio, document, image, sticker, or video]
+     * @param string $media
+     * @param string $recipientId
      * @param string $recipientType
-     * @param $caption
-     * @param $link
+     * @param ?string $caption Describes the specified image or video media.
+     * @param ?string $filename Describes the filename for the specific document.
+     * @param bool $link only with HTTP/HTTPS URLs
      * @return mixed
      */
-    public function image(string $image, string $recipientId, string $recipientType = "individual", $caption = null, bool $link = true)
+    public function media(string $type, string $media, string $recipientId, string $recipientType = "individual",  bool $link = true, ?string $caption = null, ?string $filename = null)
     {
-        $prefab = ($link) ? "link" : "id";
+        try {
+            $required_types = ["audio", "document", "image", "sticker", "video"];
 
-        $data = [
-            "messaging_product" => "whatsapp",
-            "recipient_type"    => $recipientType,
-            "to"                => $recipientId,
-            "type"              => "image",
-            "image"             => [
-                $prefab     => $image,
-                "caption"   => $caption,
-            ],
-        ];
+            if (empty($type) || !in_array($type, $required_types)) throw new \Exception("Type {$type} is not supported.");
 
-        $url     = $this->config->getApiUri($this->uri);
-        $bearer  = $this->config->getAccessToken();
-        $headers = ["Authorization" => "Bearer {$bearer}"];
+            if ($link) {
+                $parse_url = parse_url($media);
+                if (isset($parse_url['scheme']) === false || ($parse_url['scheme'] !== "https" && $parse_url['scheme'] !== "http")) throw new \Exception("The protocol and URL of the media to be sent. Use only with HTTP/HTTPS URLs.");
+            }
 
-        $response = $this->http_request->post($url, $data, $headers);
+            $obj_id = ($link) ? "link" : "id";
 
-        return $response;
-    }
+            $data = [
+                "messaging_product" => "whatsapp",
+                "recipient_type"    => $recipientType,
+                "to"                => $recipientId,
+                "type"              => $type,
+                $type               => [
+                    $obj_id     => $media
+                ]
+            ];
 
-    /**
-     * @param $audio
-     * @param $recipientId
-     * @param $link
-     * @return mixed
-     */
-    public function audio(string $audio, string $recipientId, bool $link = true)
-    {
-        $data = [
-            "messaging_product" => "whatsapp",
-            "to"                => $recipientId,
-            "type"              => "audio",
-            "audio"             => ($link) ? ["link" => $audio] : ["id" => $audio],
-        ];
+            switch ($type) {
+                case 'image':
+                case 'video':
+                    if (!empty($caption)) $data[$type]['caption'] = $caption;
+                    break;
 
-        $url     = $this->config->getApiUri($this->uri);
-        $bearer  = $this->config->getAccessToken();
-        $headers = ["Authorization" => "Bearer {$bearer}"];
+                case 'document':
+                    if (!empty($filename)) $data[$type]['filename'] = $filename;
+                    break;
+            }
 
-        $response = $this->http_request->post($url, $data, $headers);
+            $url     = $this->config->getApiUri($this->uri);
+            $bearer  = $this->config->getAccessToken();
+            $headers = ["Authorization" => "Bearer {$bearer}"];
 
-        return $response;
-    }
+            $response = $this->http_request->post($url, $data, $headers);
 
-    /**
-     * @param $video
-     * @param $recipientId
-     * @param $caption
-     * @param $link
-     * @return mixed
-     */
-    public function video(string $video, string $recipientId, $caption = null, bool $link = true)
-    {
-        $prefab = ($link) ? "link" : "id";
-
-        $data = [
-            'messaging_product' => 'whatsapp',
-            'to'                => $recipientId,
-            'type'              => 'video',
-            'video'             => [
-                $prefab     => $video,
-                'caption'   => $caption,
-            ],
-        ];
-
-        $url     = $this->config->getApiUri($this->uri);
-        $bearer  = $this->config->getAccessToken();
-        $headers = ["Authorization" => "Bearer {$bearer}"];
-
-        $response = $this->http_request->post($url, $data, $headers);
-
-        return $response;
-    }
-
-    /**
-     * @param $document
-     * @param $recipientId
-     * @param $caption
-     * @param $link
-     * @return mixed
-     */
-    public function document(string $document, string $recipientId, $caption = null, bool $link = true)
-    {
-        $prefab = ($link) ? "link" : "id";
-
-        $data = [
-            "messaging_product" => "whatsapp",
-            "to"                => $recipientId,
-            "type"              => "document",
-            "document"          => [
-                $prefab     => $document,
-                "caption"   => $caption
-            ]
-        ];
-
-        $url     = $this->config->getApiUri($this->uri);
-        $bearer  = $this->config->getAccessToken();
-        $headers = ["Authorization" => "Bearer {$bearer}"];
-
-        $response = $this->http_request->post($url, $data, $headers);
-
-        return $response;
+            return $response;
+        } catch (Exception $e) {
+            echo 'Caught Exception: ',  $e->getMessage(), "\n";
+        }
     }
 
     //create button
@@ -229,11 +178,11 @@ class Messages
             "action"    => $button["action"]
         ];
 
-        if(isset($button['header'])){
+        if (isset($button['header'])) {
             $elem["header"] = ["type" => "text", "text" => $button["header"]];
         }
-        
-        if(isset($button['footer'])){
+
+        if (isset($button['footer'])) {
             $elem["footer"] = ["text" => $button["footer"]];
         }
 
