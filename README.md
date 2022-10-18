@@ -74,13 +74,11 @@ Describes the specified image or video media with caption.
 $ws->send_message()->media("image", "https://avatars.githubusercontent.com/u/29653964?v=4", $recipient_id, "individual", true, "your-image-caption-to-be-sent");
 
 $ws->send_message()->media("video", "https://file-examples.com/storage/fe4658769b6331540b05587/2017/04/file_example_MP4_480_1_5MG.mp4", $recipient_id, "individual", true, "your-video-caption-to-be-sent");
-$recipient_id);
 ```
 
 Describes the filename for the specific document.
 ```php
 $ws->send_message()->media("document", "https://file-examples.com/storage/fe4658769b6331540b05587/2017/10/file-sample_150kB.pdf", $recipient_id, "individual", true, null, "example_filename.pdf");
-$recipient_id);
 ```
 
 
