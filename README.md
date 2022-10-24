@@ -4,7 +4,7 @@
 [![Total Downloads](http://img.shields.io/packagist/dt/adrii/whatsapp-api.svg)](https://packagist.org/packages/adrii/whatsapp-api)
 [![License](http://img.shields.io/packagist/l/adrii/whatsapp-api.svg)](https://packagist.org/packages/adrii/whatsapp-api)
 
-WhatsApp-Api is a lightweight library to easily interact with cloud APIs of the WhatsApp Business Platform.
+WhatsApp-Api is a lightweight library to easily interact with cloud APIs of the [WhatsApp Business Platform](https://developers.facebook.com/docs/whatsapp/business-management-api/get-started).
 ## Installation
 
 Use [Composer](https://getcomposer.org/) to install the library.
