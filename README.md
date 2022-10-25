@@ -21,7 +21,7 @@ use Adrii\Whatsapp\Whatsapp;
 ## Configutation
 
 ```php
-$graph_version    = "v14.0";
+$graph_version    = "v15.0";
 $phone_number_id  = "{phone_number_id}";
 $access_token     = "{access_token}";
 $recipient_id     = "{recipient_id}";
