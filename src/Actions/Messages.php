@@ -12,6 +12,7 @@ class Messages
 {
     private $config;
     private $uri = "/messages";
+    private $components = [];
 
     public function __construct(Config $config)
     {
@@ -46,6 +47,20 @@ class Messages
         return $response;
     }
 
+     /**
+     * https://developers.facebook.com/docs/whatsapp/cloud-api/guides/send-message-templates#media-based
+     * @param array $component
+     * @return array
+     */
+    public function addComponent(array $component)
+    {
+        if (empty($component)) throw new \Exception("Component cannot be empty");
+
+        $this->components[] = $component;
+
+        return $this->components;
+    }
+
     /**
      * https://developers.facebook.com/docs/whatsapp/on-premises/reference/messages?locale=en_US#template-object
      * @param string $template
@@ -54,7 +69,7 @@ class Messages
      * @param ?array $components
      * @return mixed
      */
-    public function template(string $template, string $recipientId, string $lang = "en_US", ?array $components = null)
+    public function template(string $template, string $recipientId, string $lang = "en_US")
     {
         $data = [
             "messaging_product" => "whatsapp",
@@ -65,6 +80,11 @@ class Messages
                 "language"  => ["code" => $lang]
             ],
         ];
+
+        if (!empty($this->components)) {
+            $data['template']["components"] =  $this->components;
+            $this->components = [];
+        }
 
         $url     = $this->config->getApiUri($this->uri);
         $bearer  = $this->config->getAccessToken();
