@@ -47,16 +47,18 @@ class Messages
         return $response;
     }
 
-     /**
+    /**
      * https://developers.facebook.com/docs/whatsapp/cloud-api/guides/send-message-templates#media-based
-     * @param array $component
+     * @param array ...$components
      * @return array
      */
-    public function addComponent(array $component)
+    public function addComponent(array ...$components)
     {
         if (empty($component)) throw new \Exception("Component cannot be empty");
 
-        $this->components[] = $component;
+        foreach ($components as $component) {
+            $this->components[] = $component;
+        }
 
         return $this->components;
     }
@@ -120,6 +122,7 @@ class Messages
         $url     = $this->config->getApiUri($this->uri);
         $bearer  = $this->config->getAccessToken();
         $headers = ["Authorization" => "Bearer {$bearer}"];
+
 
         $response = $this->http_request->post($url, $data, $headers);
 

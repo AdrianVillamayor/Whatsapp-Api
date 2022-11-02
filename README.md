@@ -48,7 +48,36 @@ $ws->send_message()->text("Aloha 🍍", $recipient_id);
 
 Send message templates defined in the Meta manager.
 ```php
-$ws->send_message()->template("hello_world", $recipient_id );
+$ws->send_message()->template("hello_world", $recipient_id);
+```
+
+Send message templates defined in the Meta manager with parameters
+```php
+$component_header = array(
+    "type" => "header",
+    "parameters" => array(
+        array(
+            "type" => "image",
+            "image" => array(
+                "link" => "https://avatars.githubusercontent.com/u/29653964?v=4"
+            )
+        ),
+    )
+);
+
+$component_body = array(
+    "type" => "body",
+    "parameters" => array(
+        array(
+            "type" => "text",
+            "text" => "Adrii 🍍"
+        )
+    )
+);
+
+$ws->send_message()->addComponent($component_header, $component_body);
+
+$response = $ws->send_message()->template("sample_purchase_feedback", $recipient_id);
 ```
 
 Sends a location, through a longitude, latitude and an address.
