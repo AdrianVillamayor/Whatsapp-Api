@@ -54,7 +54,7 @@ class Messages
      */
     public function addComponent(array ...$components)
     {
-        if (empty($component)) throw new \Exception("Component cannot be empty");
+        if (empty($components)) throw new \Exception("Component cannot be empty");
 
         foreach ($components as $component) {
             $this->components[] = $component;
