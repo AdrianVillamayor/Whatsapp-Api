@@ -1,6 +1,6 @@
 {
     "name": "adrii/whatsapp-api",
-    "description": "",
+    "description": "WhatsApp-Api is a lightweight library to easily interact with cloud APIs of the WhatsApp Business Platform.",
     "type": "library",
     "license": "MIT",
     "authors": [
