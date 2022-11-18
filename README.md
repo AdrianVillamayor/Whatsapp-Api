@@ -41,11 +41,19 @@ $ws->webhook()->connect($_GET);
 
 ## Messages
 
+| Summary  |
+| ------------- |
+| Content Cell  |
+| Content Cell  |
+
+
+### Text
 Send basic text (emojis allowed).
 ```php
 $ws->send_message()->text("Aloha 🍍", $recipient_id);
 ```
 
+### Template
 Send message templates defined in the Meta manager.
 ```php
 $ws->send_message()->template("hello_world", $recipient_id);
@@ -80,10 +88,77 @@ $ws->send_message()->addComponent($component_header, $component_body);
 $response = $ws->send_message()->template("sample_purchase_feedback", $recipient_id);
 ```
 
+### Location
+
 Sends a location, through a longitude, latitude and an address.
 ```php
 $ws->send_message()->location("41.403191", "2.174840", "La Sagrada Família", "C/ De Mallorca, 401, 08013 Barcelona", $recipient_id);
 ```
+
+### Contact
+
+Send a contact message
+
+The name is the only required parameter, the other data are optional.
+```php
+    $contact = array(
+        "addresses" => array(
+            array(
+                "city"          => "city name",
+                "country"       => "country name",
+                "country_code"  => "code",
+                "state"         => "Contact's State",
+                "street"        => "Contact's Street",
+                "type"          => "Contact's Address Type",
+                "zip"           => "Contact's Zip Code"
+            )
+        ),
+
+        "birthday" => "14-02-1997",
+        "emails" => array(
+            array(
+                "email" => "email",
+                "type" => "HOME"
+            ),
+            array(
+                "email" => "email",
+                "type" => "WORK"
+            )
+        ),
+        "name" => array(
+            "formatted_name" => "formatted name value",
+            "middle_name" => "last name value",
+        ),
+        "phones" => array(
+            array(
+                "phone" => "654034823",
+                "type" => "MAIN"
+            ),
+            array(
+                "phone" => "Phone number",
+                "type" => "HOME"
+            ),
+            array(
+                "phone" => "Phone number",
+                "type" => "WORK"
+            )
+        ),
+        "urls" => array(
+            array(
+                "url" => "some url",
+                "type" => "WORK"
+            )
+        )
+    );
+
+
+$ws->send_message()->addContact($contact);
+
+$response = $ws->send_message()->contact($recipient_id);
+
+```
+
+### Media
 
 Send a media, as a link or id
 ```php
@@ -110,6 +185,7 @@ Describes the filename for the specific document.
 $ws->send_message()->media("document", "https://file-examples.com/storage/fe4658769b6331540b05587/2017/10/file-sample_150kB.pdf", $recipient_id, "individual", true, null, "example_filename.pdf");
 ```
 
+### Interactive
 
 Send an interactive message with reply buttons
 ```php
@@ -140,7 +216,6 @@ $button = [
 $ws->send_message()->interactive($button, $recipient_id, "button");
 
 ```
-
 
 Send an interactive message with list of buttons
 ```php
@@ -190,6 +265,9 @@ $ws->send_message()->interactive($list, $recipient_id, "list");
 
 ```
 
+> ### [Data examples for each message](https://developers.facebook.com/docs/whatsapp/on-premises/webhooks/inbound#mentions)
+
+</br>
 
 # Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
