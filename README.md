@@ -41,10 +41,13 @@ $ws->webhook()->connect($_GET);
 
 ## Messages
 
-| Summary  |
-| ------------- |
-| Content Cell  |
-| Content Cell  |
+
+- [x] [Text](https://github.com/AdrianVillamayor/Whatsapp-Api#text)                 
+- [x] [Template](https://github.com/AdrianVillamayor/Whatsapp-Api#template)         
+- [x] [Location](https://github.com/AdrianVillamayor/Whatsapp-Api#location)         
+- [x] [Contact](https://github.com/AdrianVillamayor/Whatsapp-Api#contact)           
+- [x] [Media](https://github.com/AdrianVillamayor/Whatsapp-Api#media)               
+- [x] [Interactive](https://github.com/AdrianVillamayor/Whatsapp-Api#interactive)   
 
 
 ### Text
