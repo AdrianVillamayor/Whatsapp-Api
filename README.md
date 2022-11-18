@@ -29,7 +29,6 @@ composer require adrii/whatsapp-api
 ```php
 use Adrii\Whatsapp\Whatsapp;
 ```
-</br>
 
 ## Configutation
 
@@ -174,6 +173,11 @@ $ws->send_message()->addContact($contact);
 
 $response = $ws->send_message()->contact($recipient_id);
 
+```
+
+You can concatenate as many contacts as you want
+```php
+    $ws->send_message()->addContact($contact_0, $contact_1, ...);
 ```
 
 ### Media
