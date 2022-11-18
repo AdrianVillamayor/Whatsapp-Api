@@ -29,6 +29,7 @@ composer require adrii/whatsapp-api
 ```php
 use Adrii\Whatsapp\Whatsapp;
 ```
+</br>
 
 ## Configutation
 
@@ -40,6 +41,7 @@ $recipient_id     = "{recipient_id}";
 
 $ws = new Whatsapp($phone_number_id, $access_token, $graph_version);
 ```
+</br>
 
 ## Webhook
 To be alerted when you receive a message or when the status of a message changes, you need to set up a webhook connection point for your app.
@@ -50,6 +52,7 @@ The access_token is used to validate the connection.
 ```php
 $ws->webhook()->connect($_GET);
 ```
+</br>
 
 ## Messages
 
@@ -61,8 +64,6 @@ $ws->webhook()->connect($_GET);
 |   ✅   | [Contact](https://github.com/AdrianVillamayor/Whatsapp-Api#contact)           |
 |   ✅   | [Media](https://github.com/AdrianVillamayor/Whatsapp-Api#media)               |
 |   ✅   | [Interactive](https://github.com/AdrianVillamayor/Whatsapp-Api#interactive)   |
-
-</br>
 
 ### Text
 Send basic text (emojis allowed).
