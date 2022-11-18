@@ -61,7 +61,6 @@ $ws->webhook()->connect($_GET);
 |   ✅   | [Contact](https://github.com/AdrianVillamayor/Whatsapp-Api#contact)           |
 |   ✅   | [Media](https://github.com/AdrianVillamayor/Whatsapp-Api#media)               |
 |   ✅   | [Interactive](https://github.com/AdrianVillamayor/Whatsapp-Api#interactive)   |
-|||
 
 </br>
 
