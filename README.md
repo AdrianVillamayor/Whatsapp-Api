@@ -5,6 +5,18 @@
 [![License](http://img.shields.io/packagist/l/adrii/whatsapp-api.svg)](https://packagist.org/packages/adrii/whatsapp-api)
 
 WhatsApp-Api is a lightweight library to easily interact with cloud APIs of the [WhatsApp Business Platform](https://developers.facebook.com/docs/whatsapp/business-management-api/get-started).
+
+
+
+| INDEX |
+|-------|
+| [Installation](https://github.com/AdrianVillamayor/Whatsapp-Api#installation)   |
+| [Configutation](https://github.com/AdrianVillamayor/Whatsapp-Api#configutation) |
+| [Webhook](https://github.com/AdrianVillamayor/Whatsapp-Api#webhook)             |
+| [Messages](https://github.com/AdrianVillamayor/Whatsapp-Api#messages)           |
+| [License](https://github.com/AdrianVillamayor/Whatsapp-Api#license)             |
+ 
+
 ## Installation
 
 Use [Composer](https://getcomposer.org/) to install the library.
@@ -41,14 +53,17 @@ $ws->webhook()->connect($_GET);
 
 ## Messages
 
+| Status | Type  |
+| ------ | ----------------------------------------------------------------------------- |
+|   ✅   | [Text](https://github.com/AdrianVillamayor/Whatsapp-Api#text)                 |
+|   ✅   | [Template](https://github.com/AdrianVillamayor/Whatsapp-Api#template)         |
+|   ✅   | [Location](https://github.com/AdrianVillamayor/Whatsapp-Api#location)         |
+|   ✅   | [Contact](https://github.com/AdrianVillamayor/Whatsapp-Api#contact)           |
+|   ✅   | [Media](https://github.com/AdrianVillamayor/Whatsapp-Api#media)               |
+|   ✅   | [Interactive](https://github.com/AdrianVillamayor/Whatsapp-Api#interactive)   |
+|||
 
-- [x] [Text](https://github.com/AdrianVillamayor/Whatsapp-Api#text)                 
-- [x] [Template](https://github.com/AdrianVillamayor/Whatsapp-Api#template)         
-- [x] [Location](https://github.com/AdrianVillamayor/Whatsapp-Api#location)         
-- [x] [Contact](https://github.com/AdrianVillamayor/Whatsapp-Api#contact)           
-- [x] [Media](https://github.com/AdrianVillamayor/Whatsapp-Api#media)               
-- [x] [Interactive](https://github.com/AdrianVillamayor/Whatsapp-Api#interactive)   
-
+</br>
 
 ### Text
 Send basic text (emojis allowed).
