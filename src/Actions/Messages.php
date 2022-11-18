@@ -12,6 +12,7 @@ class Messages
 {
     private $config;
     private $uri = "/messages";
+    private $contacts = [];
     private $components = [];
 
     public function __construct(Config $config)
@@ -98,6 +99,7 @@ class Messages
     }
 
     /**
+     * https://developers.facebook.com/docs/whatsapp/on-premises/reference/messages?locale=en_US#location-object
      * @param string $lat
      * @param string $long
      * @param string $name
@@ -127,6 +129,100 @@ class Messages
         $response = $this->http_request->post($url, $data, $headers);
 
         return $response;
+    }
+
+
+    /**
+     * https://developers.facebook.com/docs/whatsapp/cloud-api/guides/send-message-templates#media-based
+     * @param array ...$components
+     * @return array
+     */
+    public function addContact(array ...$contacts): array
+    {
+        if (empty($contacts)) throw new \Exception("Contacts cannot be empty");
+
+        foreach ($contacts as $contact) {
+            if (empty($contact)) throw new \Exception("Contact cannot be empty");
+
+            $obj = array();
+
+            if (!isset($contact['name']) && empty($contact['name'])) {
+                throw new \Exception("Contact name is required");
+            }
+
+            if (!isset($contact['name']['formatted_name']) || (!isset($contact['name']['first_name']) && !isset($contact['name']['middle_name']))) {
+                throw new \Exception("Contact name, formatted_name and one of the following parameters are required: first_namestring or middle_namestring.");
+            }
+
+            $obj['name'] = $contact['name'];
+
+            unset($contact['name']);
+
+            if (isset($contact['birthday']) && !empty($contact['birthday'])) {
+                $timestamp = \strtotime($contact['birthday']);
+
+                if ($timestamp) {
+                    $birthday = date("Y-m-d", \strtotime($contact['birthday']));
+
+                    $obj['birthday'] = $birthday;
+
+                    unset($contact['birthday']);
+                } else {
+                    throw new \Exception("Contact birthday format is not correct, YYYYY-MM-DD formatted string.");
+                }
+            }
+
+            $keys = array("addresses", "birthday", "name", "org", "phones", "urls");
+
+            foreach ($contact as $key => $value) {
+                if (in_array($key, $keys) && !empty($contact[$key])) {
+
+                    if ($key == "addresses" || $key == "phones" || $key == "urls") {
+                        if (!isset($contact[$key][0]) || is_array($contact[$key][0]) === false) {
+                            throw new \Exception("Contact {$key} must be an array.");
+                        }
+                    }
+
+                    $obj[$key] = $value;
+                }
+            }
+
+            $this->contacts[] = $obj;
+        }
+
+        return $this->contacts;
+    }
+
+
+    /**
+     * https://developers.facebook.com/docs/whatsapp/on-premises/reference/messages?locale=en_US#contacts-object
+     * @param string $recipientId
+     * @return mixed
+     */
+
+    public function contact(string $recipientId)
+    {
+        try {
+            if (empty($this->contacts)) throw new \Exception("Contacts cannot be empty");
+
+            $data = [
+                "messaging_product" => "whatsapp",
+                "to"                => $recipientId,
+                "type"              => "contacts",
+                "contacts"          => $this->contacts
+            ];
+
+            $url     = $this->config->getApiUri($this->uri);
+            $bearer  = $this->config->getAccessToken();
+            $headers = ["Authorization" => "Bearer {$bearer}"];
+
+
+            $response = $this->http_request->post($url, $data, $headers);
+
+            return $response;
+        } catch (Exception $e) {
+            echo 'Caught Exception: ',  $e->getMessage(), "\n";
+        }
     }
 
     /**
@@ -187,13 +283,12 @@ class Messages
         }
     }
 
-    //create button
 
     /**
      * @param array $button
      * @return array
      */
-    public function createInteraction(array $button, string $type)
+    public function createInteraction(array $button, string $type): array
     {
         $elem =  [
             "type"      => $type,
@@ -213,6 +308,7 @@ class Messages
     }
 
     /**
+     * https://developers.facebook.com/docs/whatsapp/on-premises/reference/messages?locale=en_US#interactive-object
      * @param $button
      * @param $recipientId
      * @return mixed
