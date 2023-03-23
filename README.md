@@ -100,7 +100,19 @@ $component_body = array(
     )
 );
 
-$ws->send_message()->addComponent($component_header, $component_body);
+$component_button = array(
+    "type"      => "button",
+    "sub_type"  => "url",
+    "index"     => 0,
+    "parameters" => array(
+        array(
+            "type" => "text",
+            "text" => "https://github.com/AdrianVillamayor/Whatsapp-Api"
+        )
+    )
+);
+
+$ws->send_message()->addComponent($component_header, $component_body, $component_button);
 
 $response = $ws->send_message()->template("sample_purchase_feedback", $recipient_id);
 ```
