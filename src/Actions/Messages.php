@@ -14,6 +14,7 @@ class Messages
     private $uri = "/messages";
     private $contacts = [];
     private $components = [];
+    private $http_request;
 
     public function __construct(Config $config)
     {

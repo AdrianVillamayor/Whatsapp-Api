@@ -12,6 +12,8 @@ use Adrii\Whatsapp\Actions\Webhook;
 class Whatsapp
 {
     private $config;
+    private $messages;
+    private $webhook;
 
     /**
      * @param string $phone_number_id

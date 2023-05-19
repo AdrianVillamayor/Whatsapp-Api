@@ -15,7 +15,7 @@
         }
     },
     "require": {
-        "adrii/curl-helper": "^1.7"
+        "adrii/curl-helper": "^1.8"
     },
     
     "minimum-stability": "dev"
